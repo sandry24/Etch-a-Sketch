@@ -17,8 +17,10 @@ function createSquareGrid(size) {
         for (let j = 0; j < size; j++) {
             const cell = document.createElement("div");
             cell.classList.add("flex-cell");
+            cell.style.opacity = 0;
             cell.addEventListener("mouseover", () => {
-                cell.style.backgroundColor = 'black';
+                cell.style.backgroundColor = returnRandomColor();
+                increaseOpacity(cell);
             });
             row.appendChild(cell);
         }
@@ -41,4 +43,21 @@ function promptUserAndResetGrid() {
     }
 
     createSquareGrid(size);
+}
+
+function returnColorBlack() {
+    return "#000000";
+}
+
+function returnRandomColor() {
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256);
+    let blue = Math.floor(Math.random() * 256);
+    return `rgb(${red}, ${green}, ${blue})`;
+}
+
+function increaseOpacity(cell) {
+    let opacity = Number(cell.style.opacity);
+    opacity += 0.1;
+    cell.style.opacity = opacity;
 }
