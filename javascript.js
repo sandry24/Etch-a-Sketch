@@ -1,7 +1,13 @@
 const container = document.querySelector(".container");
+const resetButton = document.querySelector(".reset-button");
+
 
 document.addEventListener("DOMContentLoaded", () => {
-    createSquareGrid(100);
+    createSquareGrid(16);
+});
+
+resetButton.addEventListener("click", () => {
+    promptUserAndResetGrid();
 });
 
 function createSquareGrid(size) {
@@ -18,4 +24,21 @@ function createSquareGrid(size) {
         }
         container.appendChild(row);
     }
+}
+
+function promptUserAndResetGrid() {
+    container.innerHTML = '';
+
+    let size = prompt("Input the size of the grid (max. 100)");
+    if (!size instanceof Number) {
+        return;
+    } 
+
+    if (size <= 0) {
+        size = 1;
+    } else if (size > 100) {
+        size = 100;
+    }
+
+    createSquareGrid(size);
 }
